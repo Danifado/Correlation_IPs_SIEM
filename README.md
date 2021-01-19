@@ -19,7 +19,7 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the fol
 - csv
 
 ```bash
-pip install requests json sys datetime pandas re docx socket selenium
+pip install requests json sys datetime pandas re docx socket selenium xlrd csv
 ```
 
 ## Usage
