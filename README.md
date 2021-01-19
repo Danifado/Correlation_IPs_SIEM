@@ -15,6 +15,8 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the fol
 - docx
 - socket
 - selenium
+- xlrd
+- csv
 
 ```bash
 pip install requests json sys datetime pandas re docx socket selenium
