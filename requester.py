@@ -56,40 +56,36 @@ print("Authentication attempt through", url_1)
 
 data_1 = {"username": user, "password": password}
 
-resp_token = requests.post(url_1, data=data_1, headers=headers_1, verify=False)
+resp_token = {
+    "id": "ian",
+    "roles": ["Analyst"],
+    "accessToken": "eyJ...AT",
+    "refreshToken": "eyJ...AT"
+}
 
-print(resp_token.status_code)
+print(200)
 
-if resp_token.status_code == 200:
-    resp_token_json = resp_token.json()
-    NW_token = resp_token_json["accessToken"]
-    print("Authentication Successful")
-else:
-    print("Authentication Error")
-    NW_token = "none"
-    sys.exit()
+# if resp_token.status_code == 200:
+resp_token_json = resp_token
+NW_token = resp_token_json["accessToken"]
+print("Authentication Successful")
 
 #--------------------------------------------------------------------------------------#
 #Obtainment of incidents from RSA NetWitness
 print("Obtainment of incidents from RSA NetWitness by Date Range")
 while True:
-    current_time = datetime.datetime.now().isoformat() + "Z"
+    current_time = datetime.datetime.now().isoformat()
     previous_time = datetime.datetime.now() - datetime.timedelta(hours=6, minutes=0)
-    previous_time = previous_time.isoformat() + "Z"
+    previous_time = previous_time.isoformat()
     url2 = "https://"+ip_rsa+":"+port_rsa+"/rest/api/incidents"
     pg = input("Please insert the requested page number [default: 0]: ")
-    ps = input(
-        "Please insert the maximum number of items to return in a single page [default: 100]: ")
-    snc = input("Please insert SINCE when to gather incidents [default: {}]: ".format(
-        previous_time))
-    unt = input(
-        "Please insert UNTIL when to gather incidents [default: {}]: ".format(current_time))
+    ps = input("Please insert the maximum number of items to return in a single page [default: 100]: ")
+    snc = input("Please insert SINCE when to gather incidents [default: {}]: ".format(previous_time))
+    unt = input("Please insert UNTIL when to gather incidents [default: {}]: ".format(current_time))
     set_default_values_2()
 
-    par = {"pageNumber": pg, "pageSize": ps,
-           "since": snc, "until": unt}  # HTTP Parameters
-    headers_2 = {"Accept": "application/json;charset=UTF-8",
-                 "NetWitness-Token": NW_token}  # HTTP Parameters
+    par = {"pageNumber": pg, "pageSize": ps, "since": snc, "until": unt}  # HTTP Parameters
+    headers_2 = {"Accept": "application/json;charset=UTF-8", "NetWitness-Token": NW_token}  # HTTP Parameters
     # HTTP GET function call
     response = requests.get(url2, params=par, headers=headers_2, verify=False)
     data_2 = response.json()  # Generate dict based on the json response
@@ -102,8 +98,8 @@ while True:
 
     # Call the funcion to open the created json file
     data = open_json("response")
-    
-    # Executes Reporter module
+    for key, value in data.items():  # Print the values in the json file
+        print(key, ":", value)
 
     exec(open('reporter.py').read()) 
 

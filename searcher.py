@@ -88,7 +88,7 @@ def Multi_Change(Dict):
         listas_IP.append(IP)
         destination = Search_Destination_Ip(Dict,i)
         listas_IP = listas_IP +  destination
-        information = search_csv_v3(listas_IP,"tabla_excel")
+        information = search_csv_v3(listas_IP,"DB")
         #we extract a dictionary from the database in . CSV containing all the required information
         Dict['items'][i].update(information)    
             #we added this information to the list created previously
