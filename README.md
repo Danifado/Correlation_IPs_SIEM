@@ -13,15 +13,29 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the fol
 - pandas
 - re
 - docx
+- socket
+- selenium
 
 ```bash
-pip install requests json sys datetime pandas re docx
+pip install requests json sys datetime pandas re docx socket selenium
 ```
 
 ## Usage
-Make sure that the database name is saved as `DB.csv`
+Make sure that the database name is saved as "DB.xls"` and it should has the same columns as the excel "sample.xls" with the columns: Sucursal, Area,	Dependencia, 	Ciudad,	VLAN id,	Proveedor Internet, Segmento Lan,	Mascara	Gateway, DNS	Dir, IP FW, where:
 
-Run the `requester.py` module, then fill every field with the requested information.
+Sucursal: Branch of the organization
+Area: internal area in the "sucursal"
+Dependencia: internal subarea in the "area"
+Ciudad: City
+VLAN id:	Identification of the vlan
+Proveedor Internet: ISP - Interet Service Provider
+Segmento Lan: 10.10.20.1 -81
+Mascara: 255.255.242.1
+Gateway: 10.10.20.2
+DNS	Dir: 10.10.20.25	
+IP FW: 10.10.20.1
+
+Run $python requester.py, then fill every field with the requested information.
 ```bash
 Please insert the IP of the RSA NetWitness server: XX.XX.XX.XX
 Please insert the communication port with the RSA NetWitness server [default: 443]: 443
